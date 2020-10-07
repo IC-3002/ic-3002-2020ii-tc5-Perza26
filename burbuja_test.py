@@ -35,7 +35,24 @@ def _comparar_curvas(fitted_a, fitted_b):
 def generar_aleatorio(n):
     A = list(range(0, n))
     shuffle(A)
+    return A
 
+def generar_mejor_caso(n):
+    A = list(range(0,n))
+    return A
+
+def generar_caso_promedio(n):
+    A = list(range(0,n))
+    medio = len(A)//2
+    particion1 = A[:medio]
+    particion2 = A[medio:]
+    shuffle(primera_parte)
+    solucion = particion1 + particion2
+    return solucion
+
+def generar_peor_caso(n):
+    A = list(range(0,n))
+    A.reverse()
     return A
 
 
@@ -82,12 +99,26 @@ class PruebasBurbuja(unittest.TestCase):
 
 
     def test_mejor_caso(self):
-        self.fail('Pendiente de implementar')
+        print()
+        best, fitted = big_o.big_o(burbuja_optimizado, generar_mejor_caso, min_n=10, max_n=1000,
+                                   n_measures=100, n_repeats=3, verbose=False,
+                                   classes=[cmpl.Linear, cmpl.Quadratic], return_raw_data=True)
 
+        _graficar(fitted, 'Mejor Caso')
 
     def test_peor_caso(self):
-        self.fail('Pendiente de implementar')
+        print()
+        best, fitted = big_o.big_o(burbuja_optimizado, generar_peor_caso, min_n=10, max_n=1000,
+                                   n_measures=100, n_repeats=3, verbose=False,
+                                   classes=[cmpl.Linear, cmpl.Quadratic], return_raw_data=True)
+
+        _graficar(fitted, 'Peor Caso')
 
 
     def test_caso_promedio(self):
-        self.fail('Pendiente de implementar')
+        print()
+        best, fitted = big_o.big_o(burbuja_optimizado, generar_promedio, min_n=10, max_n=1000,
+                                   n_measures=100, n_repeats=3, verbose=False,
+                                   classes=[cmpl.Linear, cmpl.Quadratic], return_raw_data=True)
+
+        _graficar(fitted, 'Caso Promedio')
